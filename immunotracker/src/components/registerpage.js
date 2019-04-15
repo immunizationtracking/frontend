@@ -10,7 +10,7 @@ export default class login extends Component {
         <div className="top-content">
           <div className="logsub-box">Large Logo</div>
           <div className="logsub-box">
-            <Logbox />
+            <Register />
           </div>
         </div>
         <div className="bottom-content">

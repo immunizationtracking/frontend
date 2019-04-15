@@ -1,0 +1,12 @@
+.log-text {
+  display: flex;
+  flex-direction: column;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+.log-body {
+  display: flex;
+  padding: 10px;
+}

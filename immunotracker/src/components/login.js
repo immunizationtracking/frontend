@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import "./login.css";
+import Logbox from "./LoginComp";
 
 export default class login extends Component {
   render() {
     return (
       <div>
         <div className="top-content">
-          <div>Large Logo</div>
+          <div className="logsub-box">Large Logo</div>
           <div className="logsub-box">
-            Login/Submit(Put in another route to which)
+            <Logbox />
           </div>
         </div>
         <div className="bottom-content">

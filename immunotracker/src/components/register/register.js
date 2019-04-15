@@ -4,29 +4,31 @@ export default class Register extends Component {
   constructor() {
     super();
     this.state = {
-      first: "",
-      last: "",
-      username: "",
-      password: "",
-      email: "",
-      role: false
+      newuser: {
+        first: "",
+        last: "",
+        username: "",
+        password: "",
+        email: "",
+        role: false
+      }
     };
   }
-  handleInputChangeF = e => {
-    this.setState({ first: e.target.value });
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
-  handleInputChangeL = e => {
-    this.setState({ last: e.target.value });
-  };
-  handleInputChangeU = e => {
-    this.setState({ username: e.target.value });
-  };
-  handleInputChangeP = e => {
-    this.setState({ password: e.target.value });
-  };
-  handleInputChangeE = e => {
-    this.setState({ email: e.target.value });
-  };
+  //   handleInputChangeL = e => {
+  //     this.setState({ last: e.target.value });
+  //   };
+  //   handleInputChangeU = e => {
+  //     this.setState({ username: e.target.value });
+  //   };
+  //   handleInputChangeP = e => {
+  //     this.setState({ password: e.target.value });
+  //   };
+  //   handleInputChangeE = e => {
+  //     this.setState({ email: e.target.value });
+  //   };
   truedoc = () => {
     this.setState({ role: true });
   };
@@ -50,23 +52,17 @@ export default class Register extends Component {
             </div>
           </div>
           <div className="inputs">
+            <input onChange={this.handleInputChange} value={this.state.first} />
+            <input onChange={this.handleInputChange} value={this.state.last} />
             <input
-              onChange={this.handleInputChangeF}
-              value={this.state.first}
-            />
-            <input onChange={this.handleInputChangeL} value={this.state.last} />
-            <input
-              onChange={this.handleInputChangeU}
+              onChange={this.handleInputChange}
               value={this.state.username}
             />
             <input
-              onChange={this.handleInputChangeP}
+              onChange={this.handleInputChange}
               value={this.state.password}
             />
-            <input
-              onChange={this.handleInputChangeE}
-              value={this.state.email}
-            />
+            <input onChange={this.handleInputChange} value={this.state.email} />
           </div>
         </div>
         <button>Log In</button>

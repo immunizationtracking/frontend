@@ -1,0 +1,18 @@
+.top-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.top-content div {
+  padding: 100px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.bottom-content {
+  display: flex;
+  margin: 10px auto;
+  padding: 200px;
+  width: 27.5%;
+  border: 1px solid black;
+}

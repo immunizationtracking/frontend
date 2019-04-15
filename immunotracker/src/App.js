@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./header/header";
 import Footer from "./footer/footer";
-
+import { Route } from "react-router-dom";
+import login from "./components/login";
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <h1>Holder</h1>
+        <Route exact path="/" component={login} />
         <Footer />
       </div>
     );

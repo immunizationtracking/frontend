@@ -1,0 +1,9 @@
+import axios from "axios";
+
+export const LOG_IN_START = "LOG_IN_START";
+export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
+export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
+
+export const REGISTER_POST_START = "REGISTER_POST_START";
+export const REGISTER_POST_SUCCESS = "REGISTER_POST_SUCCESS";
+export const REGISTER_POST_FAILURE = "REGISTER_POST_FAILURE";

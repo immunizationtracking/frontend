@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./login.css";
 import Logbox from "./LoginComp";
+import Register from "./register/register";
 
 export default class login extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class login extends Component {
         <div className="top-content">
           <div className="logsub-box">Large Logo</div>
           <div className="logsub-box">
-            <Logbox />
+            <Register />
           </div>
         </div>
         <div className="bottom-content">

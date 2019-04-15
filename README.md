@@ -1,3 +1,10 @@
+## Built With
+* [React](https://reactjs.org/) - Web framework
+* [React Router](https://reacttraining.com/react-router/) - Page routing
+* [Redux](https://redux.js.org/) - State management
+
+
+
 # frontend
 front end architect repository
 

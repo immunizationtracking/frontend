@@ -10,5 +10,11 @@ import { rootReducer } from "./reducers";
 
 import "./index.css";
 import App from "./App";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);

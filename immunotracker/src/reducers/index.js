@@ -1,18 +1,38 @@
 const initialState = {
-	userLoggingIn = {
-		username: '',
-		password: ''
+	userLoggingIn: {
+		username: "",
+		password: ""
 	},
-	userRegistering = {
-		id: '',
-		username: '',
-		email: '',
-		password: '',
-		first_name: '',
-		last_name: '',
-		role: '',
+	userRegistering: {
+		id: "",
+		username: "",
+		email: "",
+		password: "",
+		first_name: "",
+		last_name: "",
+		role: ""
 	},
 
+	dummyUsers: [
+		{
+			name: "",
+			date_of_birth: "",
+			MRN: "",
+			gender: ""
+		},
+		{
+			name: "",
+			date_of_birth: "",
+			MRN: "",
+			gender: ""
+		},
+		{
+			name: "",
+			date_of_birth: "",
+			MRN: "",
+			gender: ""
+		}
+	]
 };
 
 export const rootReducer = (state = initialState, action) => {

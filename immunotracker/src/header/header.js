@@ -8,8 +8,8 @@ export default class Header extends Component {
         <p className="logo">Logo</p>
         <p>Immunotracker</p>
         <div className="link">
-          <a href="#">Log In</a>
-          <a href="#">Sign Up</a>
+          <a href="/">Log In</a>
+          <a href="/register">Sign Up</a>
         </div>
       </div>
     );

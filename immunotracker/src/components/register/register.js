@@ -21,7 +21,7 @@ class Register extends Component {
 	constructor() {
 		super();
 		this.state = {
-			newuser: {
+			newUser: {
 				first: "",
 				last: "",
 				username: "",
@@ -34,26 +34,25 @@ class Register extends Component {
 
 	handleInput = e => {
 		this.setState({
-			newuser: { ...this.state.newuser, [e.target.name]: e.target.value }
+			newUser: { ...this.state.newUser, [e.target.name]: e.target.value }
 		});
 	};
-	//   handleInputChangeL = e => {
-	//     this.setState({ last: e.target.value });
-	//   };
-	//   handleInputChangeU = e => {
-	//     this.setState({ username: e.target.value });
-	//   };
-	//   handleInputChangeP = e => {
-	//     this.setState({ password: e.target.value });
-	//   };
-	//   handleInputChangeE = e => {
-	//     this.setState({ email: e.target.value });
-	//   };
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.registerNewUser(this.state.newuser);
-		console.log(this.state.newuser);
+		this.props.registerNewUser(this.state.newUser);
+		console.log(this.state.newUser);
+		this.setState({
+			newUser: {
+				...this.state.newUser,
+				first: "",
+				last: "",
+				username: "",
+				password: "",
+				email: "",
+				role: false
+			}
+		});
 	};
 
 	truedoc = () => {
@@ -64,36 +63,55 @@ class Register extends Component {
 	};
 	render() {
 		return (
-			<div>
-				<Form>
+			<div className='registerField1'>
+				<Form onSubmit={this.handleSubmit}>
 					<Form.Input
+						onChange={this.handleInput}
 						label='Enter First Name:'
 						placeholder='First Name'
 						type='text'
+						name='first'
+						value={this.state.newUser.first}
 					/>
 					<Form.Input
+						onChange={this.handleInput}
 						label='Enter Last Name:'
 						placeholder='Last Name'
 						type='text'
+						name='last'
+						value={this.state.newUser.last}
 					/>
 					<Form.Input
+						onChange={this.handleInput}
 						label='Enter Userame:'
 						placeholder='Username'
 						type='text'
+						name='username'
+						value={this.state.newUser.username}
 					/>
 					<Form.Input
+						onChange={this.handleInput}
 						label='Enter Password:'
 						placeholder='Password'
 						type='password'
+						name='password'
+						value={this.state.newUser.password}
 					/>
-					<Form.Input label='Enter Email:' placeholder='Email' type='text' />
+					<Form.Input
+						onChange={this.handleInput}
+						label='Enter Email:'
+						placeholder='Email'
+						type='email'
+						name='email'
+						value={this.state.newUser.email}
+					/>
 					<Form.Dropdown
 						placeholder='Select Role'
 						fluid
 						selection
 						options={roleOptions}
 					/>
-					<Button>Register</Button>
+					<Button onClick={this.handleSubmit}>Register</Button>
 				</Form>
 				{/* <div className='log-body'>
 					<div className='log-text'>

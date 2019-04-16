@@ -29,6 +29,28 @@ const MinCard = props => {
           {props.patient.last_visit}
         </p>
       </div>
+      <div className="Vac-Info">
+        <div>
+          <p>
+            <strong>MENINGITIS:</strong>
+          </p>
+          <p>
+            <strong>POLIO:</strong>
+          </p>
+          <p>
+            <strong>RABIES:</strong>
+          </p>
+          <p>
+            <strong>DIPHTHERIA/TETANUS</strong>
+          </p>
+          <p>
+            <strong>TYPHOID:</strong>
+          </p>
+          <p>
+            <strong>YELLOW FEVER:</strong>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -53,13 +53,13 @@ class cardview extends React.Component {
       <div>
         {this.state.patients.map(patient => {
           return (
-            <Link to={`/users/${patient.name}`} state={this.state}>
+            <div>
               <MinCard
                 key={patient.name}
                 patient={patient}
                 selected={this.selected}
               />
-            </Link>
+            </div>
           );
         })}
       </div>

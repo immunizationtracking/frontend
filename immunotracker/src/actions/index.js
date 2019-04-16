@@ -19,3 +19,15 @@ export const logUserIn = user => dispatch => {
 			dispatch({ type: LOG_IN_FAILURE, payload: err.err });
 		});
 };
+
+export const registerNewUser = newUser => dispatch => {
+	dispatch({ type: REGISTER_POST_START });
+	axios
+		.post("new-user-api-url-here", newUser)
+		.then(res => {
+			dispatch({ type: REGISTER_POST_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: REGISTER_POST_FAILURE, payload: err.rrr });
+		});
+};

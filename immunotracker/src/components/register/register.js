@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerNewUser } from "../../actions";
 
-import { Form, Button, Dropdown } from "semantic-ui-react";
+import { Form, Button, Dropdown, Message } from "semantic-ui-react";
 
 const roleOptions = [
 	{
@@ -67,9 +67,15 @@ class Register extends Component {
 		this.setState({ role: false });
 	};
 	render() {
+		const registerStatus = this.props.wasRegisterSuccesful;
+
 		return (
 			<div className='registerField1'>
-				<Form onSubmit={this.handleSubmit}>
+				<Form
+					success={registerStatus === true}
+					error={registerStatus === false}
+					onSubmit={this.handleSubmit}
+				>
 					<Form.Input
 						onChange={this.handleInput}
 						label='Enter First Name:'
@@ -119,6 +125,16 @@ class Register extends Component {
 						options={roleOptions}
 					/>
 					<Button onClick={this.handleSubmit}>Register</Button>
+					<Message
+						success
+						header='Registration Success'
+						content={`${this.props.registerSuccessMsg}`}
+					/>
+					<Message
+						error
+						header='Registration Error'
+						content={`${this.props.registerErrMsg}`}
+					/>
 				</Form>
 				{/* <div className='log-body'>
 					<div className='log-text'>
@@ -167,13 +183,15 @@ class Register extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	isRegistered: state.isRegistered,
-	isRegistering: state.isRegistering,
-	wasRegisterSuccesful: state.wasRegisterSuccesful,
-	registerErrMsg: state.registerErrMsg,
-	registerSuccessMsg: state.registerSuccessMsg
-});
+const mapStateToProps = state => {
+	return {
+		isRegistered: state.isRegistered,
+		isRegistering: state.isRegistering,
+		wasRegisterSuccesful: state.wasRegisterSuccesful,
+		registerErrMsg: state.registerErrMsg,
+		registerSuccessMsg: state.registerSuccessMsg
+	};
+};
 
 export default connect(
 	mapStateToProps,

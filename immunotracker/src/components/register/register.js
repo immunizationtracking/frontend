@@ -4,6 +4,19 @@ import { registerNewUser } from "../../actions";
 
 import { Form, Button } from "semantic-ui-react";
 
+const roleOptions = [
+	{
+		key: 1,
+		text: "User",
+		value: "User"
+	},
+	{
+		key: 2,
+		text: "Medical Institution",
+		value: "Medical Institution"
+	}
+];
+
 class Register extends Component {
 	constructor() {
 		super();
@@ -18,6 +31,7 @@ class Register extends Component {
 			}
 		};
 	}
+
 	handleInput = e => {
 		this.setState({
 			newuser: { ...this.state.newuser, [e.target.name]: e.target.value }
@@ -73,6 +87,12 @@ class Register extends Component {
 						type='password'
 					/>
 					<Form.Input label='Enter Email:' placeholder='Email' type='text' />
+					<Form.Dropdown
+						placeholder='Select Role'
+						fluid
+						selection
+						options={roleOptions}
+					/>
 					<Button>Register</Button>
 				</Form>
 				{/* <div className='log-body'>

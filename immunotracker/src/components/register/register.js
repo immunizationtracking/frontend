@@ -14,8 +14,10 @@ export default class Register extends Component {
       }
     };
   }
-  handleInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleInput = e => {
+    this.setState({
+      newuser: { ...this.state.newuser, [e.target.name]: e.target.value }
+    });
   };
   //   handleInputChangeL = e => {
   //     this.setState({ last: e.target.value });
@@ -29,6 +31,7 @@ export default class Register extends Component {
   //   handleInputChangeE = e => {
   //     this.setState({ email: e.target.value });
   //   };
+
   truedoc = () => {
     this.setState({ role: true });
   };
@@ -52,17 +55,31 @@ export default class Register extends Component {
             </div>
           </div>
           <div className="inputs">
-            <input onChange={this.handleInputChange} value={this.state.first} />
-            <input onChange={this.handleInputChange} value={this.state.last} />
             <input
-              onChange={this.handleInputChange}
+              onChange={this.handleInput}
+              value={this.state.first}
+              name="first"
+            />
+            <input
+              onChange={this.handleInput}
+              value={this.state.last}
+              name="last"
+            />
+            <input
+              onChange={this.handleInput}
               value={this.state.username}
+              name="username"
             />
             <input
-              onChange={this.handleInputChange}
+              onChange={this.handleInput}
               value={this.state.password}
+              name="password"
             />
-            <input onChange={this.handleInputChange} value={this.state.email} />
+            <input
+              onChange={this.handleInput}
+              value={this.state.email}
+              name="email"
+            />
           </div>
         </div>
         <button>Log In</button>

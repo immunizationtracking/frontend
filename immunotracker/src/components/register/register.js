@@ -34,6 +34,12 @@ class Register extends Component {
 	//     this.setState({ email: e.target.value });
 	//   };
 
+	handleSubmit = e => {
+		e.preventDefault();
+		this.props.registerNewUser(this.state.newuser);
+		console.log(this.state.newuser);
+	};
+
 	truedoc = () => {
 		this.setState({ role: true });
 	};
@@ -84,7 +90,7 @@ class Register extends Component {
 						/>
 					</div>
 				</div>
-				<button>Log In</button>
+				<button onClick={this.handleSubmit}>Log In</button>
 			</div>
 		);
 	}

@@ -1,0 +1,28 @@
+.top-small-info {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  margin-left: 5%;
+  text-decoration: none;
+}
+
+.bot-small-info {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  margin-left: 5%;
+  text-decoration: none;
+}
+
+.small-card {
+  border: 1px black solid;
+  margin: 30px auto;
+  border-radius: 15px;
+  width: 90%;
+  text-decoration: none;
+}
+.top-small-info p {
+  text-decoration: none;
+}

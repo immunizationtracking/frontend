@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./regcss.css";
 export default class Register extends Component {
   constructor() {
     super();
@@ -41,6 +41,7 @@ export default class Register extends Component {
   render() {
     return (
       <div>
+        <p>Submission Form</p>
         <div className="log-body">
           <div className="log-text">
             <strong>First Name:</strong>
@@ -48,7 +49,7 @@ export default class Register extends Component {
             <strong>Username:</strong>
             <strong>Password:</strong>
             <strong>Email:</strong>
-            <div>
+            <div className="role">
               <strong>Role:</strong>
               <button onClick={this.truedoc}>Doctor</button>
               <button onClick={this.notdoc}>Patient</button>

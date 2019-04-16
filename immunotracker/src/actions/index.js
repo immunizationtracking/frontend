@@ -28,6 +28,6 @@ export const registerNewUser = newUser => dispatch => {
 			dispatch({ type: REGISTER_POST_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
-			dispatch({ type: REGISTER_POST_FAILURE, payload: err.rrr });
+			dispatch({ type: REGISTER_POST_FAILURE, payload: err });
 		});
 };

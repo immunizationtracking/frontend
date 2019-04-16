@@ -5,16 +5,21 @@ export default class Logbox extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: ""
+      user: {
+        username: "",
+        password: ""
+      }
     };
   }
-  handleInputChangeU = e => {
-    this.setState({ username: e.target.value });
+  handleInputChange = e => {
+    this.setState({
+      user: { ...this.state.user, [e.target.name]: e.target.value }
+    });
+    console.log(this.state.user);
   };
-  handleInputChangeP = e => {
-    this.setState({ password: e.target.value });
-  };
+  //   handleInputChangeP = e => {
+  //     this.setState({ password: e.target.value });
+  //   };
   render() {
     return (
       <div>
@@ -25,12 +30,14 @@ export default class Logbox extends Component {
           </div>
           <div className="inputs">
             <input
-              onChange={this.handleInputChangeU}
+              onChange={this.handleInputChange}
               value={this.state.username}
+              name="username"
             />
             <input
-              onChange={this.handleInputChangeP}
+              onChange={this.handleInputChange}
               value={this.state.password}
+              name="password"
             />
           </div>
         </div>

@@ -41,7 +41,13 @@ const initialState = {
 			MRN: "",
 			gender: ""
 		}
-	]
+	],
+	isRegistered: "",
+	isRegistering: "",
+	wasRegisterSuccesful: "",
+	registerErrMsg: "",
+	registerSuccessMsg: "",
+	currentUser: ""
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -50,6 +56,29 @@ export const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoggingIn: true
+			};
+		case REGISTER_POST_START:
+			return {
+				...state,
+				isRegistered: false,
+				isRegistering: true
+			};
+		case REGISTER_POST_SUCCESS:
+			return {
+				...state,
+				isRegistered: true,
+				isRegistering: false,
+				wasRegisterSuccesful: true,
+				registerSuccessMsg: "Success!",
+				currentUser: action.payload
+			};
+		case REGISTER_POST_FAILURE:
+			return {
+				...state,
+				isRegistered: false,
+				isRegistering: false,
+				wasRegisterSuccesful: false,
+				registerErrMsg: action.payload
 			};
 		default:
 			return state;

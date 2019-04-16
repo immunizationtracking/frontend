@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerNewUser } from "../../actions";
 
-import { Form } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 
 class Register extends Component {
 	constructor() {
@@ -51,7 +51,31 @@ class Register extends Component {
 	render() {
 		return (
 			<div>
-				<div className='log-body'>
+				<Form>
+					<Form.Input
+						label='Enter First Name:'
+						placeholder='First Name'
+						type='text'
+					/>
+					<Form.Input
+						label='Enter Last Name:'
+						placeholder='Last Name'
+						type='text'
+					/>
+					<Form.Input
+						label='Enter Userame:'
+						placeholder='Username'
+						type='text'
+					/>
+					<Form.Input
+						label='Enter Password:'
+						placeholder='Password'
+						type='password'
+					/>
+					<Form.Input label='Enter Email:' placeholder='Email' type='text' />
+					<Button>Register</Button>
+				</Form>
+				{/* <div className='log-body'>
 					<div className='log-text'>
 						<strong>First Name:</strong>
 						<strong>Last Name:</strong>
@@ -91,8 +115,8 @@ class Register extends Component {
 							name='email'
 						/>
 					</div>
-				</div>
-				<button onClick={this.handleSubmit}>Log In</button>
+				</div> */}
+				{/* <button onClick={this.handleSubmit}>Log In</button> */}
 			</div>
 		);
 	}

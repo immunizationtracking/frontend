@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerNewUser } from "../../actions";
 
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Dropdown } from "semantic-ui-react";
 
 const roleOptions = [
 	{
 		key: 1,
 		text: "User",
-		value: "User"
+		value: false
 	},
 	{
 		key: 2,
 		text: "Medical Institution",
-		value: "Medical Institution"
+		value: true
 	}
 ];
 
@@ -27,7 +27,7 @@ class Register extends Component {
 				username: "",
 				password: "",
 				email: "",
-				role: false
+				role: null
 			}
 		};
 	}
@@ -37,6 +37,11 @@ class Register extends Component {
 			newUser: { ...this.state.newUser, [e.target.name]: e.target.value }
 		});
 	};
+
+	handleDropChange = (e, { value }) =>
+		this.setState({
+			newUser: { ...this.state.newUser, role: value }
+		});
 
 	handleSubmit = e => {
 		e.preventDefault();
@@ -50,7 +55,7 @@ class Register extends Component {
 				username: "",
 				password: "",
 				email: "",
-				role: false
+				role: ""
 			}
 		});
 	};
@@ -105,7 +110,9 @@ class Register extends Component {
 						name='email'
 						value={this.state.newUser.email}
 					/>
-					<Form.Dropdown
+					<Dropdown
+						onChange={this.handleDropChange}
+						name='role'
 						placeholder='Select Role'
 						fluid
 						selection

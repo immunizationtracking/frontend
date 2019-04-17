@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import login from "./components/login";
 import Regi from "./components/registerpage";
 import cardview from "./components/Cards/CardsList";
+import Maxcard from "./components/Cards/maxcard";
 class App extends Component {
   render() {
     return (

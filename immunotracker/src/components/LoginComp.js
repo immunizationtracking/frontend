@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logUserIn } from "../actions";
 import "./log.css";
-
+import {
+  Form,
+  Input,
+  TextArea,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  Dropdown,
+  Select
+} from "formsy-semantic-ui-react";
 class Logbox extends Component {
   constructor() {
     super();
@@ -34,28 +43,27 @@ class Logbox extends Component {
 
   render() {
     return (
-      <div>
+      <Form>
         <p>Please use your Username and Password to Log in.</p>
         <div className="log-body">
-          <div className="log-text">
-            <strong>Username:</strong>
-            <strong>Password:</strong>
-          </div>
           <div className="inputs">
-            <input
+            <Form.Input
               onChange={this.handleInputChange}
               value={this.state.user.username}
               name="username"
+              label="Enter Username"
             />
-            <input
+            <Form.Input
               onChange={this.handleInputChange}
               value={this.state.user.password}
               name="password"
+              type="password"
+              label="Enter Password"
             />
           </div>
         </div>
-        <button onClick={this.handleSubmit}>Log In</button>
-      </div>
+        <Form.Button onClick={this.handleSubmit}>Log In</Form.Button>
+      </Form>
     );
   }
 }

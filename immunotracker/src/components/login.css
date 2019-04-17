@@ -1,22 +1,27 @@
 .top-content {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .logsub-box {
   padding: 100px;
   border: 1px solid black;
   margin: 20px;
+  border-radius: 25px;
 }
 
 .bottom-content {
   display: flex;
   margin: 10px auto;
   padding: 200px;
-  width: 27.5%;
+  width: 58%;
   border: 1px solid black;
+  border-radius: 25px;
 }
-
+.loglogo {
+  width: 25%;
+}
 .registerField1 {
   width: 60%;
   margin: 10rem auto;

@@ -2,6 +2,8 @@ import React from "react";
 import MinCard from "./mincard";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Maxcard from "./maxcard";
+import axios from "axios";
+import { get } from "http";
 class cardview extends React.Component {
   constructor() {
     super();
@@ -34,6 +36,23 @@ class cardview extends React.Component {
       ]
     };
   }
+  // componentDidMount() {
+  //   axios
+  //     .get("USER API HERE")
+  //     .then(res => {
+  //       this.setState(() => ({ patients: res.data }));
+  //       console.log(res.data);
+  //     })
+  //     .catch(error => console.log("you done goofed"));
+  // }
+  removepatient = id => {
+    axios
+      .delete(`API OF USER/${id}`)
+      .then(res => {
+        this.setState({ patients: res.data });
+      })
+      .catch(error => console.log(error));
+  };
   selected = name => {
     this.state.patients.map(patient => {
       if (name === patient.name) {
@@ -57,6 +76,7 @@ class cardview extends React.Component {
                 key={patient.name}
                 patient={patient}
                 selected={this.selected}
+                remove={this.removepatient}
               />
             </div>
           );

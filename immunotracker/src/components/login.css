@@ -2,12 +2,11 @@
   display: flex;
   justify-content: center;
 }
+
 .logsub-box {
   padding: 100px;
   border: 1px solid black;
   margin: 20px;
-  border-radius: 25px;
-  background-color: turquoise;
 }
 
 .bottom-content {
@@ -16,13 +15,9 @@
   padding: 200px;
   width: 27.5%;
   border: 1px solid black;
-  border-radius: 25px;
-  background-color: turquoise;
 }
 
-.llogo {
-  width: 30%;
-}
-.loglogo {
-  width: 25%;
+.registerField1 {
+  width: 60%;
+  margin: 10rem auto;
 }

@@ -26,3 +26,7 @@
 .top-small-info p {
   text-decoration: none;
 }
+.Vac-Info p {
+  display: flex;
+  justify-content: space-between;
+}

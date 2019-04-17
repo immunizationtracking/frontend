@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Maxcard from "./maxcard";
 const MinCard = props => {
   return (
-    <div className="small-card">
+    <div
+      className="small-card"
+      onClick={() => props.selected(props.patient.name)}
+    >
       <div className="top-small-info">
         <p>
           <strong>Name:</strong>
@@ -30,24 +33,99 @@ const MinCard = props => {
         </p>
       </div>
       <div className="Vac-Info">
-        <div>
+        <div
+          className="Vac-name"
+          style={
+            props.patient.selected ? { display: "block" } : { display: "none" }
+          }
+        >
+          <h2>Year 1</h2>
           <p>
-            <strong>MENINGITIS:</strong>
+            <strong>HEP B:</strong>
+            <p>use passed information for HEP</p>
+            <p>Did Doctor Sign</p>
           </p>
           <p>
-            <strong>POLIO:</strong>
+            <strong> ORAL POLIO:</strong>
+            <p>use passed information for POLIO</p>
+            <p>Did Doctor Sign</p>
           </p>
           <p>
-            <strong>RABIES:</strong>
+            <strong>BCG:</strong>
+            <p>use passed information for BCG</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <h4>6 weeks to 6 months</h4>
+          <p>
+            <strong>Oral Rotavirus:</strong>
+            <p>use passed information for ORAL ROTAVIRUS</p>
+            <p>Did Doctor Sign</p>
           </p>
           <p>
-            <strong>DIPHTHERIA/TETANUS</strong>
+            <strong>DTP:</strong>
+            <p>use passed information for DTP</p>
+            <p>Did Doctor Sign</p>
           </p>
           <p>
-            <strong>TYPHOID:</strong>
+            <strong>HIB:</strong>
+            <p>use passed information for HIB</p>
+            <p>Did Doctor Sign</p>
           </p>
           <p>
-            <strong>YELLOW FEVER:</strong>
+            <strong>HEP B:</strong>
+            <p>use passed information for HEP B</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>ORAL POLIO:</strong>
+            <p>use passed information for ORAL POLIO</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>INJECTABLE POLIO:</strong>
+            <p>use passed information for INJECTABLE POLIO</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>PNEUMOCOCCAL:</strong>
+            <p>use passed information for PNEUMOCOCCAL</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <h4>7 months to 12 months</h4>
+          <p>
+            <strong>FLU:</strong>
+            <p>use passed information for FLU</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>MEASLES:</strong>
+            <p>use passed information for MEASLES</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <h2>Year 2</h2>
+          <p>
+            <strong>HEP A:</strong>
+            <p>use passed information for HEPATITIS A</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>MMR:</strong> <p>use passed information for MMR</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>CHICKENPOX:</strong>
+            <p>use passed information for CHICKENPOX</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>DTP:</strong>
+            <p>use passed information for DTP</p>
+            <p>Did Doctor Sign</p>
+          </p>
+          <p>
+            <strong>HIB:</strong>
+            <p>use passed information for HIB</p>
+            <p>Did Doctor Sign</p>
           </p>
         </div>
       </div>

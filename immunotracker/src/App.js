@@ -6,7 +6,7 @@ import { Route } from "react-router-dom";
 import Login from "./components/Login";
 import RegisterPage from "./components/RegisterPage";
 import cardview from "./components/Cards/CardsList";
-import Maxcard from "./components/Cards/maxcard";
+import PrivateRoute from "./utils/PrivateRoute";
 class App extends Component {
 	render() {
 		return (
@@ -15,7 +15,7 @@ class App extends Component {
 				<div className='wrapper'>
 					<Route exact path='/' component={Login} />
 					<Route exact path='/register' component={RegisterPage} />
-					<Route exact path='/users' component={cardview} />
+					<PrivateRoute exact path='/users' component={cardview} />
 				</div>
 				<Footer />
 			</div>

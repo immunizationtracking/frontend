@@ -11,7 +11,7 @@ export const REGISTER_POST_FAILURE = "REGISTER_POST_FAILURE";
 export const logUserIn = user => dispatch => {
 	dispatch({ type: LOG_IN_START });
 	axios
-		.post("API-URL-Here", user)
+		.post("https://immunization-tracker.herokuapp.com/api/auth/login", user)
 		.then(res => {
 			dispatch({ type: LOG_IN_SUCCESS, payload: res.data });
 		})
@@ -23,7 +23,10 @@ export const logUserIn = user => dispatch => {
 export const registerNewUser = newUser => dispatch => {
 	dispatch({ type: REGISTER_POST_START });
 	axios
-		.post("new-user-api-url-here", newUser)
+		.post(
+			"https://immunization-tracker.herokuapp.com/api/auth/register",
+			newUser
+		)
 		.then(res => {
 			dispatch({ type: REGISTER_POST_SUCCESS, payload: res.data });
 		})

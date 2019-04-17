@@ -34,19 +34,18 @@ class cardview extends React.Component {
       ]
     };
   }
-  //   selected = name => {
-  //     console.log("in selected");
-  //     this.state.patients.map(patient => {
-  //       if (name === patient.name) {
-  //         console.log(patient);
-  //         this.setState({
-  //           ...this.state.patients,
-  //           patients: { ...patients, completed: true }
-  //         });
-  //         console.log(patient);
-  //       }
-  //     });
-  //   };
+  selected = name => {
+    this.state.patients.map(patient => {
+      if (name === patient.name) {
+        this.setState({
+          ...this.state.patients,
+          [this.state.patients.selected]: !patient.selected
+        });
+
+        patient.selected = !patient.selected;
+      }
+    });
+  };
   render() {
     console.log();
     return (

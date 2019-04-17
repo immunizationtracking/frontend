@@ -60,14 +60,8 @@ class Register extends Component {
     });
   };
 
-  truedoc = () => {
-    this.setState({ role: true });
-  };
-  notdoc = () => {
-    this.setState({ role: false });
-  };
-  render() {
-    const registerStatus = this.props.wasRegisterSuccesful;
+	render() {
+		const registerStatus = this.props.wasRegisterSuccesful;
 
     return (
       <div className="registerField1">

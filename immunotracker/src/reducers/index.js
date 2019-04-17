@@ -78,7 +78,7 @@ export const rootReducer = (state = initialState, action) => {
 				isRegistered: false,
 				isRegistering: false,
 				wasRegisterSuccesful: false,
-				registerErrMsg: "Fail"
+				registerErrMsg: action.payload
 			};
 		default:
 			return state;

@@ -38,7 +38,6 @@ class Register extends Component {
 		super(props);
 		this.state = {
 			newUser: {
-				id: Date.now,
 				username: "",
 				password: "",
 				firstName: "",

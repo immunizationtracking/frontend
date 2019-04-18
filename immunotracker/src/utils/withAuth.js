@@ -2,8 +2,12 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 export default () => {
-	const token = localStorage.getItem("token");
-	const decoded = jwt_decode(token);
+  const token = localStorage.getItem("token");
 
-	return decoded;
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${token}`
+    }
+  };
 };

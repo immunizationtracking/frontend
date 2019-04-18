@@ -11,15 +11,16 @@ const MinCard = props => {
       <div className="top-small-info">
         <p>
           <strong>Name:</strong>
-          {props.patient.name}
+          {props.patient.firstName}
+          {props.patient.lastName}
         </p>
         <p>
           <strong>Sex:</strong>
-          {props.patient.sex}
+          {props.patient.gender}
         </p>
         <p>
           <strong>DOB:</strong>
-          {props.patient.DOB}
+          {props.patient.dateOfBirth.substr(0, 10)}
         </p>
       </div>
       <div className="bot-small-info">

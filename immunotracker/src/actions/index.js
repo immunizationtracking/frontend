@@ -41,8 +41,9 @@ export const registerNewUser = newUser => dispatch => {
 export const LOG_OUT = "LOG_OUT";
 
 export const logUserOut = dispatch => {
-	localStorage.removeItem("token");
-	dispatch({ type: LOG_OUT });
+	localStorage.removeItem("token").then(() => {
+		dispatch({ type: LOG_OUT });
+	});
 	console.log("test");
 };
 

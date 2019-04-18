@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logUserIn } from "../actions";
+import { withRouter } from "react-router-dom";
 import "./log.css";
 import { Link } from "react-router-dom";
 import {
@@ -32,7 +33,9 @@ class Logbox extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.logUserIn(this.state.user);
+    this.props.logUserIn(this.state.user).then(() => {
+      this.props.history.push("/users/");
+    });
     console.log(this.state.user);
     this.setState({
       user: {
@@ -44,28 +47,28 @@ class Logbox extends Component {
 
   render() {
     return (
-      <Form>
+      <div>
         <p>Please use your Username and Password to Log in.</p>
         <div className="log-body">
+          <div className="log-text">
+            <strong>Username:</strong>
+            <strong>Password:</strong>
+          </div>
           <div className="inputs">
-            <Form.Input
+            <input
               onChange={this.handleInputChange}
               value={this.state.user.username}
               name="username"
-              label="Enter Username"
             />
-            <Form.Input
+            <input
               onChange={this.handleInputChange}
               value={this.state.user.password}
               name="password"
-              type="password"
-              label="Enter Password"
             />
           </div>
         </div>
-
-        <Form.Button onClick={this.handleSubmit}>Log In</Form.Button>
-      </Form>
+        <button onClick={this.handleSubmit}>Log In</button>
+      </div>
     );
   }
 }
@@ -77,4 +80,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logUserIn }
-)(Logbox);
+)(withRouter(Logbox));

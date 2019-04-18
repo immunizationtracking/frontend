@@ -11,7 +11,10 @@ import {
 	LOAD_PATIENTS_FAILURE,
 	ADD_PATIENT_START,
 	ADD_PATIENT_SUCCESS,
-	ADD_PATIENT_FAILURE
+	ADD_PATIENT_FAILURE,
+	REMOVE_PATIENT_START,
+	REMOVE_PATIENT_SUCCESS,
+	REMOVE_PATIENT_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -131,6 +134,16 @@ export const rootReducer = (state = initialState, action) => {
 				patientsLoaded: true,
 				patients: [...state.patients, action.payload]
 			};
+		case REMOVE_PATIENT_START: {
+		}
+		case REMOVE_PATIENT_SUCCESS: {
+			console.log("FROM PATIENT SUCCESS RED", action);
+			return {
+				...state
+			};
+		}
+		case REMOVE_PATIENT_FAILURE: {
+		}
 		default:
 			return state;
 	}

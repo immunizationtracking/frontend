@@ -82,3 +82,22 @@ export const addPatient = (patient, token) => dispatch => {
 			dispatch({ type: ADD_PATIENT_FAILURE, payload: err });
 		});
 };
+
+export const REMOVE_PATIENT_START = "REMOVE_PATIENT_START";
+export const REMOVE_PATIENT_SUCCESS = "REMOVE_PATIENT_SUCCESS";
+export const REMOVE_PATIENT_FAILURE = "REMOVE_PATIENT_FAILURE";
+
+export const removePatient = (id, token) => dispatch => {
+	dispatch({ type: REMOVE_PATIENT_START });
+	axios
+		.delete(
+			`https://immunization-tracker.herokuapp.com/api/patients/${id}`,
+			token
+		)
+		.then(res => {
+			dispatch({ type: REMOVE_PATIENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: REMOVE_PATIENT_FAILURE, payload: err });
+		});
+};

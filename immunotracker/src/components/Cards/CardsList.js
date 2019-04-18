@@ -5,7 +5,7 @@ import Maxcard from "./maxcard";
 import axios from "axios";
 import withAuth from "../../utils/withAuth";
 import { connect } from "react-redux";
-import { loadPatients, addPatient } from "../../actions";
+import { loadPatients, addPatient, removePatient } from "../../actions";
 import {
 	Form,
 	Input,
@@ -45,6 +45,10 @@ class cardview extends React.Component {
 		this.setState({
 			newuser: ""
 		});
+	};
+
+	removePatient = id => {
+		this.props.removePatient(id, token);
 	};
 
 	// addpatient = id => {
@@ -95,8 +99,8 @@ class cardview extends React.Component {
 											key={patient.name}
 											id={patient.id}
 											patient={patient}
-											selected={this.selected}
-											remove={this.removepatient}
+											selected={() => this.selected}
+											remove={() => this.removePatient}
 										/>
 									</div>
 								);
@@ -147,5 +151,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ addPatient, loadPatients }
+	{ addPatient, loadPatients, removePatient }
 )(cardview);

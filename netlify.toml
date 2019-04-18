@@ -1,9 +1,6 @@
 [build]
-  base    = “./immunotracker”
+  base = "./immunotracker"
   publish = "./immunotracker/build"
-  command = "yarn build"  
+  command = "yarn build"
   
-  [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+

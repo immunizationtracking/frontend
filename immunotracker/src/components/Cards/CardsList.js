@@ -4,10 +4,30 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Maxcard from "./maxcard";
 import axios from "axios";
 import withAuth from "../../utils/withAuth";
+import {
+  Form,
+  Input,
+  TextArea,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  Dropdown,
+  Select
+} from "formsy-semantic-ui-react";
+import "./cardlistcss.css";
+
 class cardview extends React.Component {
   constructor() {
     super();
     this.state = {
+      newuser: {
+        firstName: "",
+        lastName: "",
+        gender: "",
+        dateOfBirth: "",
+
+        patientUserId: 1
+      },
       patients: [
         // {
         //   id: "0",
@@ -46,16 +66,25 @@ class cardview extends React.Component {
       .get(`https://immunization-tracker.herokuapp.com/api/patients/`, token)
       .then(res => {
         console.log(res);
-        this.setState(() => ({ patients: res.data }));
-        console.log(res.data);
+        this.setState(() => ({ patients: res.data.patients }));
+
+        console.log("THIS IS THE NEW: ", this.state.patients);
       })
       .catch(error => {
         console.log(error);
       });
   }
-  removepatient = id => {
+  addpatient = id => {
+    const token = withAuth();
+    console.log(token);
+
+    console.log("this is token:", withAuth());
     axios
-      .delete(`https://immunization-tracker.herokuapp.com/api/users/${id}`)
+      .post(
+        `https://immunization-tracker.herokuapp.com/api/patients`,
+        this.state.newuser,
+        token
+      )
       .then(res => {
         this.setState({ patients: res.data });
       })
@@ -73,23 +102,60 @@ class cardview extends React.Component {
       }
     });
   };
+  handleInputChange = e => {
+    this.setState({
+      ...this.state,
+      newuser: { ...this.state.newuser, [e.target.name]: e.target.value }
+    });
+    console.log(this.state.newuser);
+  };
   render() {
     console.log();
     return (
       <div>
-        {this.state.patients.map(patient => {
-          return (
-            <div>
-              <MinCard
-                key={patient.name}
-                id={patient.id}
-                patient={patient}
-                selected={this.selected}
-                remove={this.removepatient}
-              />
-            </div>
-          );
-        })}
+        <div>
+          {this.state.patients.map(patient => {
+            return (
+              <div>
+                <MinCard
+                  key={patient.name}
+                  id={patient.id}
+                  patient={patient}
+                  selected={this.selected}
+                  remove={this.removepatient}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <Form className="addpatientform">
+          <Form.Input
+            onChange={this.handleInputChange}
+            value={this.state.newuser.firstName}
+            name="firstName"
+            label="first name"
+          />
+          <Form.Input
+            onChange={this.handleInputChange}
+            value={this.state.newuser.LastName}
+            name="lastName"
+            label="lastname"
+          />
+          <Form.Input
+            onChange={this.handleInputChange}
+            value={this.state.newuser.gender}
+            name="gender"
+            label="gender"
+          />
+          <Form.Input
+            onChange={this.handleInputChange}
+            value={this.state.newuser.dateOfBirth}
+            name="dateOfBirth"
+            label="DOB"
+            type="date"
+          />
+          <button onClick={() => this.addpatient()}>add</button>
+        </Form>
       </div>
     );
   }

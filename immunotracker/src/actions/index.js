@@ -10,30 +10,38 @@ export const REGISTER_POST_SUCCESS = "REGISTER_POST_SUCCESS";
 export const REGISTER_POST_FAILURE = "REGISTER_POST_FAILURE";
 
 export const logUserIn = user => dispatch => {
-  dispatch({ type: LOG_IN_START });
-  return axios
-    .post("https://immunization-tracker.herokuapp.com/api/auth/login", user)
-    .then(res => {
-      localStorage.setItem("token", res.data.token);
-      console.log(res.data.token);
-      dispatch({ type: LOG_IN_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: LOG_IN_FAILURE, payload: err.err });
-    });
+	dispatch({ type: LOG_IN_START });
+	return axios
+		.post("https://immunization-tracker.herokuapp.com/api/auth/login", user)
+		.then(res => {
+			localStorage.setItem("token", res.data.token);
+			console.log(res.data.token);
+			dispatch({ type: LOG_IN_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: LOG_IN_FAILURE, payload: err.err });
+		});
 };
 
 export const registerNewUser = newUser => dispatch => {
-  dispatch({ type: REGISTER_POST_START });
-  axios
-    .post(
-      "https://immunization-tracker.herokuapp.com/api/auth/register",
-      newUser
-    )
-    .then(res => {
-      dispatch({ type: REGISTER_POST_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: REGISTER_POST_FAILURE, payload: err });
-    });
+	dispatch({ type: REGISTER_POST_START });
+	axios
+		.post(
+			"https://immunization-tracker.herokuapp.com/api/auth/register",
+			newUser
+		)
+		.then(res => {
+			dispatch({ type: REGISTER_POST_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: REGISTER_POST_FAILURE, payload: err });
+		});
+};
+
+export const LOG_OUT = "LOG_OUT";
+
+export const logUserOut = dispatch => {
+	dispatch({ type: LOG_OUT });
+	console.log("test");
+	localStorage.removeItem("token");
 };

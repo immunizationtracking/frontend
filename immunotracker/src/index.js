@@ -10,14 +10,16 @@ import { rootReducer } from "./reducers";
 
 import "./index.css";
 import App from "./App";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+
+const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>
-			<App />
+			<AppWithRouter />
 		</Router>
 	</Provider>,
 	document.getElementById("root")

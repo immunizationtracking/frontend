@@ -3,7 +3,7 @@ import MinCard from "./mincard";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Maxcard from "./maxcard";
 import axios from "axios";
-import { get } from "http";
+import withAuth from "../../utils/withAuth";
 class cardview extends React.Component {
   constructor() {
     super();
@@ -40,15 +40,17 @@ class cardview extends React.Component {
     };
   }
   componentDidMount() {
+    const token = withAuth();
+    console.log(token);
     axios
-      .get(`https://immunization-tracker.herokuapp.com/api/users/`)
+      .get(`https://immunization-tracker.herokuapp.com/api/patients/`, token)
       .then(res => {
         console.log(res);
         this.setState(() => ({ patients: res.data }));
         console.log(res.data);
       })
       .catch(error => {
-        console.log(this.state);
+        console.log(error);
       });
   }
   removepatient = id => {

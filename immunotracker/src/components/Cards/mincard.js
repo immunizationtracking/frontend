@@ -11,7 +11,7 @@ const MinCard = props => {
       <div className="top-small-info">
         <p>
           <strong>Name:</strong>
-          {props.patient.name}
+          {props.patient.username}
         </p>
         <p>
           <strong>Sex:</strong>

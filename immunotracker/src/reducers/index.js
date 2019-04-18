@@ -4,7 +4,8 @@ import {
 	LOG_IN_FAILURE,
 	REGISTER_POST_START,
 	REGISTER_POST_SUCCESS,
-	REGISTER_POST_FAILURE
+	REGISTER_POST_FAILURE,
+	LOG_OUT
 } from "../actions";
 
 const initialState = {
@@ -47,7 +48,9 @@ const initialState = {
 	wasRegisterSuccesful: "",
 	registerErrMsg: "",
 	registerSuccessMsg: "",
-	currentUser: ""
+	currentUser: "",
+	isLoggedIn: false,
+	isLoggedOut: true
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -56,6 +59,12 @@ export const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoggingIn: true
+			};
+		case LOG_IN_SUCCESS:
+			return {
+				...state,
+				isLoggedIn: true,
+				isLoggedOut: false
 			};
 		case REGISTER_POST_START:
 			return {
@@ -79,6 +88,12 @@ export const rootReducer = (state = initialState, action) => {
 				isRegistering: false,
 				wasRegisterSuccesful: false,
 				registerErrMsg: action.payload
+			};
+		case LOG_OUT:
+			return {
+				...state,
+				isLoggedIn: false,
+				isLoggedOut: true
 			};
 		default:
 			return state;

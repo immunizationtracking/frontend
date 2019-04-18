@@ -41,7 +41,43 @@ export const registerNewUser = newUser => dispatch => {
 export const LOG_OUT = "LOG_OUT";
 
 export const logUserOut = dispatch => {
+	localStorage.removeItem("token");
 	dispatch({ type: LOG_OUT });
 	console.log("test");
-	localStorage.removeItem("token");
+};
+
+export const LOAD_PATIENTS_START = "LOAD_PATIENTS_START";
+export const LOAD_PATIENTS_SUCCESS = "LOAD_PATIENTS_SUCCESS";
+export const LOAD_PATIENTS_FAILURE = "LOAD_PATIENTS_FAILURE";
+
+export const loadPatients = token => dispatch => {
+	dispatch({ type: LOAD_PATIENTS_START });
+	axios
+		.get(`https://immunization-tracker.herokuapp.com/api/patients/`, token)
+		.then(res => {
+			dispatch({ type: LOAD_PATIENTS_SUCCESS, payload: res.data.patients });
+		})
+		.catch(err => {
+			dispatch({ type: LOAD_PATIENTS_FAILURE, payload: err });
+		});
+};
+
+export const ADD_PATIENT_START = "ADD_PATIENT_START";
+export const ADD_PATIENT_SUCCESS = "ADD_PATIENT_SUCCESS";
+export const ADD_PATIENT_FAILURE = "ADD_PATIENT_FAILURE";
+
+export const addPatient = (patient, token) => dispatch => {
+	dispatch({ type: ADD_PATIENT_START });
+	axios
+		.post(
+			"https://immunization-tracker.herokuapp.com/api/patients",
+			patient,
+			token
+		)
+		.then(res => {
+			dispatch({ type: ADD_PATIENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: ADD_PATIENT_FAILURE, payload: err });
+		});
 };

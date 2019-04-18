@@ -9,45 +9,51 @@ class cardview extends React.Component {
     super();
     this.state = {
       patients: [
-        {
-          name: "Kevin",
-          DOB: "3/12/1987",
-          MRN: "28945",
-          sex: "male",
-          last_visit: "10/20/2017",
-          selected: false
-        },
-        {
-          name: "Katie",
-          DOB: "5/31/1992",
-          MRN: "839210",
-          sex: "female",
-          last_visit: "1/24/2018",
-          selected: false
-        },
-        {
-          name: "Kahlua",
-          DOB: "1/11/1991",
-          MRN: "22222",
-          sex: "alcohol",
-          last_visit: "21/22/1908",
-          selected: false
-        }
+        // {
+        //   id: "0",
+        //   name: "Kevin",
+        //   DOB: "3/12/1987",
+        //   MRN: "28945",
+        //   sex: "male",
+        //   last_visit: "10/20/2017",
+        //   selected: false
+        // },
+        // {
+        //   id: "1",
+        //   name: "Katie",
+        //   DOB: "5/31/1992",
+        //   MRN: "839210",
+        //   sex: "female",
+        //   last_visit: "1/24/2018",
+        //   selected: false
+        // },
+        // {
+        //   id: "2",
+        //   name: "Kahlua",
+        //   DOB: "1/11/1991",
+        //   MRN: "22222",
+        //   sex: "alcohol",
+        //   last_visit: "21/22/1908",
+        //   selected: false
+        // }
       ]
     };
   }
-  // componentDidMount() {
-  //   axios
-  //     .get("USER API HERE")
-  //     .then(res => {
-  //       this.setState(() => ({ patients: res.data }));
-  //       console.log(res.data);
-  //     })
-  //     .catch(error => console.log("you done goofed"));
-  // }
+  componentDidMount() {
+    axios
+      .get(`https://immunization-tracker.herokuapp.com/api/users/`)
+      .then(res => {
+        console.log(res);
+        this.setState(() => ({ patients: res.data }));
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(this.state);
+      });
+  }
   removepatient = id => {
     axios
-      .delete(`API OF USER/${id}`)
+      .delete(`https://immunization-tracker.herokuapp.com/api/users/${id}`)
       .then(res => {
         this.setState({ patients: res.data });
       })
@@ -74,6 +80,7 @@ class cardview extends React.Component {
             <div>
               <MinCard
                 key={patient.name}
+                id={patient.id}
                 patient={patient}
                 selected={this.selected}
                 remove={this.removepatient}

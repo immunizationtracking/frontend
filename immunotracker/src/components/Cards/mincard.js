@@ -31,7 +31,6 @@ const MinCard = props => {
           <strong>Last Visited:</strong>
           {props.patient.last_visit}
         </p>
-        <button onClick={props.remove}>Remove</button>
       </div>
       <div className="Vac-Info">
         <div
@@ -128,6 +127,7 @@ const MinCard = props => {
             <p>use passed information for HIB</p>
             <p>Did Doctor Sign</p>
           </p>
+          <button onClick={props.remove}>Remove</button>
         </div>
       </div>
     </div>

@@ -3,71 +3,81 @@ import { connect } from "react-redux";
 import { logUserIn } from "../actions";
 import { withRouter } from "react-router-dom";
 import "./log.css";
-
+import { Link } from "react-router-dom";
+import {
+  Form,
+  Input,
+  TextArea,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  Dropdown,
+  Select
+} from "formsy-semantic-ui-react";
 class Logbox extends Component {
-	constructor() {
-		super();
-		this.state = {
-			user: {
-				username: "",
-				password: ""
-			}
-		};
-	}
-	handleInputChange = e => {
-		this.setState({
-			user: { ...this.state.user, [e.target.name]: e.target.value }
-		});
-		console.log(this.state.user);
-	};
+  constructor() {
+    super();
+    this.state = {
+      user: {
+        username: "",
+        password: ""
+      }
+    };
+  }
+  handleInputChange = e => {
+    this.setState({
+      user: { ...this.state.user, [e.target.name]: e.target.value }
+    });
+    console.log(this.state.user);
+  };
 
-	handleSubmit = e => {
-		e.preventDefault();
-		this.props.logUserIn(this.state.user).then(() => {
-			this.props.history.push("/users/");
-		});
-		console.log(this.state.user);
-		this.setState({
-			user: {
-				username: "",
-				password: ""
-			}
-		});
-	};
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.logUserIn(this.state.user).then(() => {
+      this.props.history.push("/users/");
+    });
+    console.log(this.state.user);
+    this.setState({
+      user: {
+        username: "",
+        password: ""
+      }
+    });
+  };
 
-	render() {
-		return (
-			<div>
-				<p>Please use your Username and Password to Log in.</p>
-				<div className='log-body'>
-					<div className='log-text'>
-						<strong>Username:</strong>
-						<strong>Password:</strong>
-					</div>
-					<div className='inputs'>
-						<input
-							onChange={this.handleInputChange}
-							value={this.state.user.username}
-							name='username'
-						/>
-						<input
-							onChange={this.handleInputChange}
-							value={this.state.user.password}
-							name='password'
-						/>
-					</div>
-				</div>
-				<button onClick={this.handleSubmit}>Log In</button>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <p>Please use your Username and Password to Log in.</p>
+        <div className="log-body">
+          <div className="log-text">
+            <strong>Username:</strong>
+            <strong>Password:</strong>
+          </div>
+          <div className="inputs">
+            <input
+              onChange={this.handleInputChange}
+              value={this.state.user.username}
+              name="username"
+            />
+            <input
+              onChange={this.handleInputChange}
+              value={this.state.user.password}
+              name="password"
+            />
+          </div>
+        </div>
+        <button onClick={this.handleSubmit}>Log In</button>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-	isLoggingIn: state.isLoggingIn
+  isLoggingIn: state.isLoggingIn
 });
 
 export default connect(
-	mapStateToProps,
-	{ logUserIn }
+  mapStateToProps,
+  { logUserIn }
 )(withRouter(Logbox));

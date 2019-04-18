@@ -60,7 +60,9 @@ class Register extends Component {
 		});
 
 	handleSubmit = () => {
-		this.props.registerNewUser(this.state.newUser);
+    
+    this.props.registerNewUser(this.state.newUser);
+    
 		console.log(this.state.newUser);
 		// this.setState({
 		// 	newUser: {

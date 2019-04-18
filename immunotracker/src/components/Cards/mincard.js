@@ -6,7 +6,7 @@ const MinCard = props => {
   return (
     <div
       className="small-card"
-      onClick={() => props.selected(props.patient.name)}
+      onClick={() => props.selected(props.patient.firstName)}
     >
       <div className="top-small-info">
         <p>
@@ -128,7 +128,7 @@ const MinCard = props => {
             <p>use passed information for HIB</p>
             <p>Did Doctor Sign</p>
           </p>
-          <button onClick={props.remove}>Remove</button>
+          <button>Remove</button>
         </div>
       </div>
     </div>

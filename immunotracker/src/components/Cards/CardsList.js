@@ -68,7 +68,7 @@ class cardview extends React.Component {
         console.log(res);
         this.setState(() => ({ patients: res.data.patients }));
 
-        console.log("THIS IS THE NEW: ", this.state.patients);
+        console.log("THIS IS THE NEW: ", res.data.patients);
       })
       .catch(error => {
         console.log(error);
@@ -76,9 +76,7 @@ class cardview extends React.Component {
   }
   addpatient = id => {
     const token = withAuth();
-    console.log(token);
 
-    console.log("this is token:", withAuth());
     axios
       .post(
         `https://immunization-tracker.herokuapp.com/api/patients`,
@@ -86,13 +84,16 @@ class cardview extends React.Component {
         token
       )
       .then(res => {
-        this.setState({ patients: res.data });
+        this.setState({
+          ...this.state.patients,
+          patients: res.data.patients
+        });
       })
       .catch(error => console.log(error));
   };
   selected = name => {
     this.state.patients.map(patient => {
-      if (name === patient.name) {
+      if (name === patient.firstName) {
         this.setState({
           ...this.state.patients,
           [this.state.patients.selected]: !patient.selected
@@ -110,11 +111,12 @@ class cardview extends React.Component {
     console.log(this.state.newuser);
   };
   render() {
-    console.log();
+    console.log("BEFORE PATIENTS:", this.state.patients);
     return (
       <div>
         <div>
           {this.state.patients.map(patient => {
+            console.log(patient);
             return (
               <div>
                 <MinCard

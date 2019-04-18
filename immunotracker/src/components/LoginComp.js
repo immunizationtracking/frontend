@@ -48,26 +48,34 @@ class Logbox extends Component {
   render() {
     return (
       <div>
-        <p>Please use your Username and Password to Log in.</p>
-        <div className="log-body">
-          <div className="log-text">
-            <strong>Username:</strong>
-            <strong>Password:</strong>
+        <Form>
+          <p>Please use your Username and Password to Log in.</p>
+          <div className="log-body">
+            <div className="inputs">
+              <Form.Input
+                onChange={this.handleInputChange}
+                onChange={this.handleInputChange}
+                value={this.state.user.username}
+                value={this.state.user.username}
+                name="username"
+                name="username"
+                label="Enter Username"
+              />
+              <Form.Input
+                onChange={this.handleInputChange}
+                onChange={this.handleInputChange}
+                value={this.state.user.password}
+                value={this.state.user.password}
+                name="password"
+                name="password"
+                type="password"
+                label="Enter Password"
+              />
+            </div>
           </div>
-          <div className="inputs">
-            <input
-              onChange={this.handleInputChange}
-              value={this.state.user.username}
-              name="username"
-            />
-            <input
-              onChange={this.handleInputChange}
-              value={this.state.user.password}
-              name="password"
-            />
-          </div>
-        </div>
-        <button onClick={this.handleSubmit}>Log In</button>
+
+          <Form.Button onClick={this.handleSubmit}>Log In</Form.Button>
+        </Form>
       </div>
     );
   }

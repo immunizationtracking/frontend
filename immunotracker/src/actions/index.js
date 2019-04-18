@@ -10,9 +10,11 @@ export const REGISTER_POST_FAILURE = "REGISTER_POST_FAILURE";
 
 export const logUserIn = user => dispatch => {
 	dispatch({ type: LOG_IN_START });
-	axios
+	return axios
 		.post("https://immunization-tracker.herokuapp.com/api/auth/login", user)
 		.then(res => {
+			localStorage.setItem("token", res.data.token);
+			console.log(res.data.token);
 			dispatch({ type: LOG_IN_SUCCESS, payload: res.data });
 		})
 		.catch(err => {

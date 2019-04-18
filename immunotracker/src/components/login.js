@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./login.css";
 import Logbox from "./LoginComp";
+import { withRouter, Route } from "react-router-dom";
 import largelogo from "../img/largeicon.png";
 
 class Login extends Component {
@@ -10,7 +11,7 @@ class Login extends Component {
 				<div className='top-content'>
 					<img src={largelogo} className='loglogo' />
 					<div className='logsub-box'>
-						<Logbox />
+						<Route exact path='/' component={Logbox} />
 					</div>
 				</div>
 				<div className='bottom-content'>
@@ -20,4 +21,4 @@ class Login extends Component {
 		);
 	}
 }
-export default Login;
+export default withRouter(Login);

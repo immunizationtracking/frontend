@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./header/header";
 import Footer from "./footer/footer";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Login from "./components/Login";
 import RegisterPage from "./components/RegisterPage";
 import cardview from "./components/Cards/CardsList";
@@ -23,4 +23,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default withRouter(App);

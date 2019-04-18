@@ -53,7 +53,7 @@ class cardview extends React.Component {
   }
   removepatient = id => {
     axios
-      .delete(`API OF USER/${id}`)
+      .delete(`https://immunization-tracker.herokuapp.com/api/users/${id}`)
       .then(res => {
         this.setState({ patients: res.data });
       })

@@ -41,7 +41,7 @@ class cardview extends React.Component {
   }
   componentDidMount() {
     axios
-      .get("https://immunization-tracker.herokuapp.com/api/users")
+      .get(`https://immunization-tracker.herokuapp.com/api/users/`)
       .then(res => {
         console.log(res);
         this.setState(() => ({ patients: res.data }));

@@ -64,9 +64,7 @@ class Logbox extends Component {
           </div>
         </div>
 
-        <Form.Button onClick={this.handleSubmit}>
-          <Link to="/users">Log In</Link>
-        </Form.Button>
+        <Form.Button onClick={this.handleSubmit}>Log In</Form.Button>
       </Form>
     );
   }

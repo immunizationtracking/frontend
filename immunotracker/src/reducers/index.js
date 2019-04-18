@@ -5,7 +5,13 @@ import {
 	REGISTER_POST_START,
 	REGISTER_POST_SUCCESS,
 	REGISTER_POST_FAILURE,
-	LOG_OUT
+	LOG_OUT,
+	LOAD_PATIENTS_START,
+	LOAD_PATIENTS_SUCCESS,
+	LOAD_PATIENTS_FAILURE,
+	ADD_PATIENT_START,
+	ADD_PATIENT_SUCCESS,
+	ADD_PATIENT_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -50,7 +56,11 @@ const initialState = {
 	registerSuccessMsg: "",
 	currentUser: "",
 	isLoggedIn: false,
-	isLoggedOut: true
+	isLoggedOut: true,
+	patients: [],
+	patientsLoaded: false,
+	addingPatient: false,
+	addingPatientFinished: true
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -94,6 +104,30 @@ export const rootReducer = (state = initialState, action) => {
 				...state,
 				isLoggedIn: false,
 				isLoggedOut: true
+			};
+		case LOAD_PATIENTS_START:
+			return {};
+		case LOAD_PATIENTS_SUCCESS:
+			return {
+				...state,
+				patients: action.payload,
+				patientsLoaded: true
+			};
+		case ADD_PATIENT_START:
+			return {
+				patientsLoaded: false,
+				addingPatient: true,
+				addingPatientFinished: false,
+				patientsLoaded: false
+			};
+		case ADD_PATIENT_SUCCESS:
+			return {
+				...state,
+				patients: action.payload,
+
+				addingPatient: false,
+				addingPatientFinished: true,
+				patientsLoaded: true
 			};
 		default:
 			return state;

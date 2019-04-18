@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Maxcard from "./maxcard";
 import axios from "axios";
 import withAuth from "../../utils/withAuth";
+import { connect } from "react-redux";
+import { loadPatients, addPatient } from "../../actions";
 import {
   Form,
   Input,
@@ -15,7 +17,7 @@ import {
   Select
 } from "formsy-semantic-ui-react";
 import "./cardlistcss.css";
-
+const token = withAuth();
 class cardview extends React.Component {
   constructor() {
     super();
@@ -28,72 +30,39 @@ class cardview extends React.Component {
 
         patientUserId: 1
       },
-      patients: [
-        // {
-        //   id: "0",
-        //   name: "Kevin",
-        //   DOB: "3/12/1987",
-        //   MRN: "28945",
-        //   sex: "male",
-        //   last_visit: "10/20/2017",
-        //   selected: false
-        // },
-        // {
-        //   id: "1",
-        //   name: "Katie",
-        //   DOB: "5/31/1992",
-        //   MRN: "839210",
-        //   sex: "female",
-        //   last_visit: "1/24/2018",
-        //   selected: false
-        // },
-        // {
-        //   id: "2",
-        //   name: "Kahlua",
-        //   DOB: "1/11/1991",
-        //   MRN: "22222",
-        //   sex: "alcohol",
-        //   last_visit: "21/22/1908",
-        //   selected: false
-        // }
-      ]
+      patients: []
     };
   }
+
   componentDidMount() {
-    const token = withAuth();
-    console.log(token);
-    axios
-      .get(`https://immunization-tracker.herokuapp.com/api/patients/`, token)
-      .then(res => {
-        console.log(res);
-        this.setState(() => ({ patients: res.data.patients }));
-
-        console.log("THIS IS THE NEW: ", res.data.patients);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.loadPatients(token);
   }
-  addpatient = id => {
-    const token = withAuth();
 
-    axios
-      .post(
-        `https://immunization-tracker.herokuapp.com/api/patients`,
-        this.state.newuser,
-        token
-      )
-      .then(res => {
-        this.setState({
-          ...this.state.patients,
-          patients: res.data.patients
-        });
-      })
-      .catch(error => console.log(error));
+  checkRoleFuncs = {};
+
+  addPatient = () => {
+    this.props.addPatient(this.state.newuser, token);
   };
+
+  // addpatient = id => {
+  // 	const token = withAuth();
+  // 	console.log(token);
+
+  // 	console.log("this is token:", withAuth());
+  // 	axios
+  // 		.post(
+  // 			`https://immunization-tracker.herokuapp.com/api/patients`,
+  // 			this.state.newuser,
+  // 			token
+  // 		)
+  // 		.then(res => {
+  // 			this.setState({ patients: res.data });
+  // 		})
+  // 		.catch(error => console.log(error));
+  // };
   selected = name => {
     this.state.patients.map(patient => {
-      if (name === patient.firstName) {
+      if (name === patient.name) {
         this.setState({
           ...this.state.patients,
           [this.state.patients.selected]: !patient.selected
@@ -111,24 +80,25 @@ class cardview extends React.Component {
     console.log(this.state.newuser);
   };
   render() {
-    console.log("BEFORE PATIENTS:", this.state.patients);
+    console.log();
     return (
       <div>
         <div>
-          {this.state.patients.map(patient => {
-            console.log(patient);
-            return (
-              <div>
-                <MinCard
-                  key={patient.name}
-                  id={patient.id}
-                  patient={patient}
-                  selected={this.selected}
-                  remove={this.removepatient}
-                />
-              </div>
-            );
-          })}
+          {this.props.patientsLoaded
+            ? this.props.patients.map(patient => {
+                return (
+                  <div>
+                    <MinCard
+                      key={patient.name}
+                      id={patient.id}
+                      patient={patient}
+                      selected={this.selected}
+                      remove={this.removepatient}
+                    />
+                  </div>
+                );
+              })
+            : null}
         </div>
         <Form className="addpatientform">
           <Form.Input
@@ -156,11 +126,23 @@ class cardview extends React.Component {
             label="DOB"
             type="date"
           />
-          <button onClick={() => this.addpatient()}>add</button>
+          <button onClick={this.addPatient}>add</button>
         </Form>
       </div>
     );
   }
 }
 
-export default cardview;
+const mapStateToProps = state => {
+  return {
+    patients: state.patients,
+    patientsLoaded: state.patientsLoaded,
+    addingPatient: state.addingPatient,
+    addingPatientFinished: state.addingPatientFinished
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addPatient, loadPatients }
+)(cardview);

@@ -106,7 +106,9 @@ export const rootReducer = (state = initialState, action) => {
 				isLoggedOut: true
 			};
 		case LOAD_PATIENTS_START:
-			return {};
+			return {
+				...state
+			};
 		case LOAD_PATIENTS_SUCCESS:
 			return {
 				...state,
@@ -115,19 +117,19 @@ export const rootReducer = (state = initialState, action) => {
 			};
 		case ADD_PATIENT_START:
 			return {
+				...state,
 				patientsLoaded: false,
 				addingPatient: true,
-				addingPatientFinished: false,
-				patientsLoaded: false
+				addingPatientFinished: false
 			};
 		case ADD_PATIENT_SUCCESS:
+			console.log(action);
 			return {
 				...state,
-				patients: action.payload,
-
 				addingPatient: false,
 				addingPatientFinished: true,
-				patientsLoaded: true
+				patientsLoaded: true,
+				patients: [...state.patients, action.payload]
 			};
 		default:
 			return state;

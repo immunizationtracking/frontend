@@ -84,9 +84,7 @@ class cardview extends React.Component {
 		return (
 			<div>
 				<div>
-					{this.props.patientsLoaded &&
-					!this.props.addingPatient &&
-					!this.props.addingPatientFinished
+					{this.props.patientsLoaded
 						? this.props.patients.map(patient => {
 								return (
 									<div>

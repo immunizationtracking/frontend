@@ -3,8 +3,8 @@ import "./App.css";
 import Header from "./header/header";
 import Footer from "./footer/footer";
 import { Route, withRouter } from "react-router-dom";
-import Login from "./components/Login";
-import RegisterPage from "./components/RegisterPage";
+import Login from "./components/login";
+import RegisterPage from "./components/registerpage";
 import cardview from "./components/Cards/CardsList";
 import PrivateRoute from "./utils/PrivateRoute";
 class App extends Component {

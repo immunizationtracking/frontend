@@ -7,42 +7,45 @@ const MinCard = props => {
 	return (
 		<>
 			{/* <Link to={`/users/${props.patient.id}`}> */}
-			<Link
-				to={{
-					pathname: `/users/${props.patient.id}`,
-					state: { patient: props.patient }
-				}}
-			>
-				<div className='small-card'>
-					<div className='top-small-info'>
-						<p>
-							<strong>Name:</strong>
-							{props.patient.firstName}
-							{props.patient.lastName}
-						</p>
-						<p>
-							<strong>Sex:</strong>
-							{props.patient.gender}
-						</p>
-						<p>
-							<strong>DOB:</strong>
-							{props.patient.dateOfBirth.substr(0, 10)}
-						</p>
-					</div>
-					<div className='bot-small-info'>
+
+			<div className='small-card'>
+				<div className='top-small-info'>
+					<p>
+						<strong>Name:</strong>
+						{props.patient.firstName}
+						{props.patient.lastName}
+					</p>
+					<p>
+						<strong>Sex:</strong>
+						{props.patient.gender}
+					</p>
+					<p>
+						<strong>DOB:</strong>
+						{props.patient.dateOfBirth.substr(0, 10)}
+					</p>
+				</div>
+
+				<div className='bot-small-info'>
+					<Link
+						to={{
+							pathname: `/users/${props.patient.id}`,
+							state: { patient: props.patient }
+						}}
+					>
 						<p>
 							<strong>MRN:</strong>
 							{props.patient.MRN}
 						</p>
-						<p>
-							<strong>Last Visited:</strong>
-							{props.patient.last_visit}
-						</p>
-						<button onClick={() => props.removePatient(props.patient.id)}>
-							Remove
-						</button>
-					</div>
-					{/* <div className='Vac-Info'>
+					</Link>
+					<p>
+						<strong>Last Visited:</strong>
+						{props.patient.last_visit}
+					</p>
+					<button onClick={() => props.removePatient(props.patient.id)}>
+						Remove
+					</button>
+				</div>
+				{/* <div className='Vac-Info'>
 						<div
 							className='Vac-name'
 							style={
@@ -141,8 +144,7 @@ const MinCard = props => {
 							</p>
 						</div>
 					</div> */}
-				</div>
-			</Link>
+			</div>
 		</>
 	);
 };

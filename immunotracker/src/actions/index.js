@@ -85,11 +85,14 @@ export const addPatient = (patient, token) => dispatch => {
 
 export const REMOVE_PATIENT_START = "REMOVE_PATIENT_START";
 export const REMOVE_PATIENT_SUCCESS = "REMOVE_PATIENT_SUCCESS";
+export const REMOVE_PATIENT_REFRESH = "REMOVE_PATIENT_REFRESH";
+export const REMOVE_PATIENT_REFRESH_FINISHED =
+	"REMOVE_PATIENT_REFRESH_FINISHED";
 export const REMOVE_PATIENT_FAILURE = "REMOVE_PATIENT_FAILURE";
 
 export const removePatient = (id, token) => dispatch => {
 	dispatch({ type: REMOVE_PATIENT_START });
-	axios
+	return axios
 		.delete(
 			`https://immunization-tracker.herokuapp.com/api/patients/${id}`,
 			token
@@ -97,7 +100,21 @@ export const removePatient = (id, token) => dispatch => {
 		.then(res => {
 			dispatch({ type: REMOVE_PATIENT_SUCCESS, payload: res.data });
 		})
+
 		.catch(err => {
 			dispatch({ type: REMOVE_PATIENT_FAILURE, payload: err });
 		});
 };
+
+export const refreshPatients = token => dispatch => {
+	axios
+		.get(`https://immunization-tracker.herokuapp.com/api/patients/`, token)
+		.then(res => {
+			dispatch({ type: REMOVE_PATIENT_REFRESH, payload: res.data.patients });
+		})
+		.then(() => {
+			dispatch({ type: REMOVE_PATIENT_REFRESH_FINISHED });
+		});
+};
+
+// testDoctor

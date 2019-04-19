@@ -5,7 +5,12 @@ import Maxcard from "./maxcard";
 import axios from "axios";
 import withAuth from "../../utils/withAuth";
 import { connect } from "react-redux";
-import { loadPatients, addPatient, removePatient } from "../../actions";
+import {
+	loadPatients,
+	addPatient,
+	removePatient,
+	refreshPatients
+} from "../../actions";
 import {
 	Form,
 	Input,
@@ -43,11 +48,17 @@ class cardview extends React.Component {
 	addPatient = () => {
 		this.props.addPatient(this.state.newuser, token);
 		this.setState({
-			newuser: ""
+			...this.state.newuser,
+			name: "",
+			lastName: "",
+			gender: "",
+			dateOfBirth: ""
 		});
 	};
 
 	removePatient = id => {
+		const token = withAuth();
+		console.log("FROM RM CARDSLIST", id);
 		this.props.removePatient(id, token);
 	};
 
@@ -91,7 +102,10 @@ class cardview extends React.Component {
 		return (
 			<div>
 				<div>
-					{this.props.patientsLoaded
+					{this.props.needsRefresh ? this.props.refreshPatients(token) : null}
+
+					{/* {this.props.patientsLoaded */}
+					{this.props.patients.length > 0
 						? this.props.patients.map(patient => {
 								return (
 									<div>
@@ -100,7 +114,7 @@ class cardview extends React.Component {
 											id={patient.id}
 											patient={patient}
 											selected={() => this.selected}
-											remove={() => this.removePatient}
+											removePatient={this.removePatient}
 										/>
 									</div>
 								);
@@ -145,11 +159,12 @@ const mapStateToProps = state => {
 		patients: state.patients,
 		patientsLoaded: state.patientsLoaded,
 		addingPatient: state.addingPatient,
-		addingPatientFinished: state.addingPatientFinished
+		addingPatientFinished: state.addingPatientFinished,
+		needsRefresh: state.needsRefresh
 	};
 };
 
 export default connect(
 	mapStateToProps,
-	{ addPatient, loadPatients, removePatient }
+	{ addPatient, loadPatients, removePatient, refreshPatients }
 )(cardview);

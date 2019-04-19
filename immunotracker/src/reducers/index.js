@@ -57,6 +57,7 @@ export const rootReducer = (state = initialState, action) => {
 				isLoggingIn: true
 			};
 		case LOG_IN_SUCCESS:
+			console.log("from login", action.payload);
 			return {
 				...state,
 				isLoggedIn: true,

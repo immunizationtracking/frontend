@@ -24,9 +24,11 @@ class Header extends Component {
 							Log Out
 						</a>
 					) : (
-						<a href='/'>Log In</a>
+						<>
+							<a href='/'>Log In</a>
+							<a href='/register'>Sign Up</a>
+						</>
 					)}
-					<a href='/register'>Sign Up</a>
 				</div>
 			</div>
 		);

@@ -11,7 +11,12 @@ import {
 	LOAD_PATIENTS_FAILURE,
 	ADD_PATIENT_START,
 	ADD_PATIENT_SUCCESS,
-	ADD_PATIENT_FAILURE
+	ADD_PATIENT_FAILURE,
+	REMOVE_PATIENT_START,
+	REMOVE_PATIENT_SUCCESS,
+	REMOVE_PATIENT_FAILURE,
+	REMOVE_PATIENT_REFRESH,
+	REMOVE_PATIENT_REFRESH_FINISHED
 } from "../actions";
 
 const initialState = {
@@ -29,26 +34,6 @@ const initialState = {
 		role: ""
 	},
 
-	dummyUsers: [
-		{
-			name: "",
-			date_of_birth: "",
-			MRN: "",
-			gender: ""
-		},
-		{
-			name: "",
-			date_of_birth: "",
-			MRN: "",
-			gender: ""
-		},
-		{
-			name: "",
-			date_of_birth: "",
-			MRN: "",
-			gender: ""
-		}
-	],
 	isRegistered: "",
 	isRegistering: "",
 	wasRegisterSuccesful: "",
@@ -60,7 +45,8 @@ const initialState = {
 	patients: [],
 	patientsLoaded: false,
 	addingPatient: false,
-	addingPatientFinished: true
+	addingPatientFinished: true,
+	needsRefresh: false
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -123,7 +109,6 @@ export const rootReducer = (state = initialState, action) => {
 				addingPatientFinished: false
 			};
 		case ADD_PATIENT_SUCCESS:
-			console.log(action);
 			return {
 				...state,
 				addingPatient: false,
@@ -131,6 +116,32 @@ export const rootReducer = (state = initialState, action) => {
 				patientsLoaded: true,
 				patients: [...state.patients, action.payload]
 			};
+		case REMOVE_PATIENT_START: {
+		}
+		case REMOVE_PATIENT_SUCCESS: {
+			return {
+				...state,
+				needsRefresh: true
+			};
+		}
+		case REMOVE_PATIENT_FAILURE: {
+			return {
+				...state,
+				needsRefresh: false
+			};
+		}
+		case REMOVE_PATIENT_REFRESH: {
+			return {
+				...state,
+				patients: action.payload
+			};
+		}
+		case REMOVE_PATIENT_REFRESH_FINISHED: {
+			return {
+				...state,
+				needsRefresh: false
+			};
+		}
 		default:
 			return state;
 	}

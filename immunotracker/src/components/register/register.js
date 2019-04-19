@@ -4,16 +4,7 @@ import { registerNewUser } from "../../actions";
 // import Formsy from "formsy-react";
 // import { Form, Button, Dropdown, Message } from "semantic-ui-react";
 
-import {
-	Form,
-	Input,
-	TextArea,
-	Checkbox,
-	Radio,
-	RadioGroup,
-	Dropdown,
-	Select
-} from "formsy-semantic-ui-react";
+import { Form } from "formsy-semantic-ui-react";
 
 import { Message, Label } from "semantic-ui-react";
 
@@ -60,9 +51,8 @@ class Register extends Component {
 		});
 
 	handleSubmit = () => {
-    
-    this.props.registerNewUser(this.state.newUser);
-    
+		this.props.registerNewUser(this.state.newUser);
+
 		console.log(this.state.newUser);
 		// this.setState({
 		// 	newUser: {
@@ -188,7 +178,7 @@ class Register extends Component {
 						error
 						header='Registration Error'
 						content={`${this.props.registerErrMsg}`}
-					/>{" "}
+					/>
 				</Form>
 			</div>
 		);

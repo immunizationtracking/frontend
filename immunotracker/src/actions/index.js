@@ -15,11 +15,11 @@ export const logUserIn = user => dispatch => {
 		.post("https://immunization-tracker.herokuapp.com/api/auth/login", user)
 		.then(res => {
 			localStorage.setItem("token", res.data.token);
-			console.log(res.data.token);
+			console.log(res);
 			dispatch({ type: LOG_IN_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
-			dispatch({ type: LOG_IN_FAILURE, payload: err.err });
+			dispatch({ type: LOG_IN_FAILURE, payload: err });
 		});
 };
 
@@ -118,3 +118,58 @@ export const refreshPatients = token => dispatch => {
 };
 
 // testDoctor
+
+export const GET_VACCINES_START = "GET_VACCINES_START";
+export const GET_VACCINES_SUCCESS = "GET_VACCINES_SUCCESS";
+export const GET_VACCINES_FAILURE = "GET_VACCINES_FAILURE";
+
+// export const getVaccs = (id, token) => dispatch => {
+export const getVaccs = token => dispatch => {
+	dispatch({ type: GET_VACCINES_START });
+	return (
+		axios
+			// .get(`https://immunization-tracker.herokuapp.com/api/vaccines/${id}`, token)
+			.get(`https://immunization-tracker.herokuapp.com/api/vaccines/`, token)
+			.then(res => {
+				dispatch({
+					type: GET_VACCINES_SUCCESS,
+					payload: res.data
+				});
+			})
+			.catch(err => {
+				dispatch({ type: GET_VACCINES_FAILURE, payload: err });
+			})
+	);
+};
+
+// Both of the above API calls work, commented out and non commented out.
+// Cannot use yet until seed data is posted.
+
+export const GET_DOCTOR_LIST_START = "GET_DOCTOR_LIST_START";
+export const GET_DOCTOR_LIST_SUCCESS = "GET_DOCTOR_LIST_SUCCESS";
+export const GET_DOCTOR_LIST_FAILURE = "GET_DOCTOR_LIST_FAILURE";
+
+export const getDocs = token => dispatch => {
+	dispatch({ type: GET_DOCTOR_LIST_START });
+	return axios
+		.get("https://immunization-tracker.herokuapp.com/api/practitioner/", token)
+		.then(res => {
+			dispatch({ type: GET_DOCTOR_LIST_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: GET_DOCTOR_LIST_FAILURE, payload: err });
+		});
+};
+
+export const POST_VACCINES_START = "POST_VACCINES_START";
+export const POST_VACCINES_SUCCESS = "POST_VACCINES_SUCCESS";
+export const POST_VACCINES_FAILURE = "POST_VACCINES_FAILURE";
+
+export const addVaccs = (vaccine, practicioner_id) => dispatch => {
+	dispatch({ type: POST_VACCINES_START });
+	return axios.get(
+		"https://immunization-tracker.herokuapp.com/api/vaccines",
+		vaccine,
+		practicioner_id
+	);
+};

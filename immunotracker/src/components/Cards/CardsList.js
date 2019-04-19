@@ -9,7 +9,10 @@ import {
 	loadPatients,
 	addPatient,
 	removePatient,
-	refreshPatients
+	refreshPatients,
+	getVaccs,
+	getDocs,
+	addVaccs
 } from "../../actions";
 import {
 	Form,
@@ -35,12 +38,28 @@ class cardview extends React.Component {
 
 				patientUserId: 1
 			},
-			patients: []
+			patients: "",
+			vaccine: {
+				immunizationName: "SuperCure",
+				dateReceived: "01-01-1990 ",
+				placeReceived: "SuperDoctorJr ",
+				givenBy: "Dr.SuperDoc",
+				nextShotDue: "01-02-2020",
+				doseInfo: "30cc",
+				doseNumber: "2",
+				hasAccess: false,
+				patientInfo_id: 1,
+				practitioner_id: 1
+			}
 		};
 	}
 
 	componentDidMount() {
 		this.props.loadPatients(token);
+		this.props.getDocs(token);
+		const vaccine = this.state.vaccine;
+		const practicioner_id = 1;
+		this.props.addVaccs(vaccine, practicioner_id);
 	}
 
 	checkRoleFuncs = {};
@@ -62,34 +81,35 @@ class cardview extends React.Component {
 		this.props.removePatient(id, token);
 	};
 
-	// addpatient = id => {
-	// 	const token = withAuth();
-	// 	console.log(token);
-
-	// 	console.log("this is token:", withAuth());
-	// 	axios
-	// 		.post(
-	// 			`https://immunization-tracker.herokuapp.com/api/patients`,
-	// 			this.state.newuser,
-	// 			token
-	// 		)
-	// 		.then(res => {
-	// 			this.setState({ patients: res.data });
-	// 		})
-	// 		.catch(error => console.log(error));
-	// };
-	selected = name => {
-		this.state.patients.map(patient => {
-			if (name === patient.name) {
-				this.setState({
-					...this.state.patients,
-					[this.state.patients.selected]: !patient.selected
-				});
-
-				patient.selected = !patient.selected;
-			}
-		});
+	getVaccs = id => {
+		const token = withAuth();
+		this.props.getVaccs(token);
 	};
+
+	// getDocs = () => {
+	// 	const token = withAuth();
+	// 	this.props.getDocs(token);
+	// };
+	// selected = id => {
+	// 	console.log("selected!", id);
+
+	// 	<Route
+	// 		path='/users/:id'
+	// 		render={() => {
+	// 			return <Maxcard patient={patient} />;
+	// 		}}
+	// 	/>;
+	// 	// this.state.patients.map(patient => {
+	// 	// 	if (id === patient.id) {
+	// 	// 		this.setState({
+	// 	// 			...this.state.patients,
+	// 	// 			[this.state.patients.selected]: !patient.selected
+	// 	// 		});
+
+	// 	// 		patient.selected = !patient.selected;
+	// 	// 	}
+	// 	// });
+	// };
 	handleInputChange = e => {
 		this.setState({
 			...this.state,
@@ -101,54 +121,85 @@ class cardview extends React.Component {
 		console.log();
 		return (
 			<div>
-				<div>
-					{this.props.needsRefresh ? this.props.refreshPatients(token) : null}
+				<Switch>
+					<Route
+						path='/users/:id'
+						render={props => {
+							return (
+								<Maxcard
+									props={props}
+									getVaccs={this.getVaccs}
+									vaccines={this.props.vaccines}
+								/>
+							);
+						}}
+					/>
+					<div>
+						<Form className='addpatientform'>
+							<Form.Input
+								onChange={this.handleInputChange}
+								value={this.state.newuser.firstName}
+								name='firstName'
+								label='first name'
+							/>
+							<Form.Input
+								onChange={this.handleInputChange}
+								value={this.state.newuser.lastName}
+								name='lastName'
+								label='lastname'
+							/>
+							<Form.Input
+								onChange={this.handleInputChange}
+								value={this.state.newuser.gender}
+								name='gender'
+								label='gender'
+							/>
+							<Form.Input
+								onChange={this.handleInputChange}
+								value={this.state.newuser.dateOfBirth}
+								name='dateOfBirth'
+								label='DOB'
+								type='date'
+							/>
+							<button onClick={this.addPatient}>add</button>
+						</Form>
+						{this.props.needsRefresh ? this.props.refreshPatients(token) : null}
 
-					{/* {this.props.patientsLoaded */}
-					{this.props.patients.length > 0
-						? this.props.patients.map(patient => {
-								return (
-									<div>
-										<MinCard
+						{/* {this.props.patientsLoaded */}
+						{this.props.patients.length > 0
+							? this.props.patients.map(patient => {
+									return (
+										<div>
+											<Route
+												path='/users/'
+												render={() => {
+													return (
+														<>
+															<MinCard
+																key={patient.id}
+																// selected={this.selected}
+																removePatient={this.removePatient}
+																patient={patient}
+																vaccines={this.props.vaccines}
+															/>
+														</>
+													);
+												}}
+											/>
+
+											{/* <MinCard
 											key={patient.name}
 											id={patient.id}
 											patient={patient}
-											selected={() => this.selected}
+											// selected={this.selected}
 											removePatient={this.removePatient}
-										/>
-									</div>
-								);
-						  })
-						: null}
-				</div>
-				<Form className='addpatientform'>
-					<Form.Input
-						onChange={this.handleInputChange}
-						value={this.state.newuser.firstName}
-						name='firstName'
-						label='first name'
-					/>
-					<Form.Input
-						onChange={this.handleInputChange}
-						value={this.state.newuser.lastName}
-						name='lastName'
-						label='lastname'
-					/>
-					<Form.Input
-						onChange={this.handleInputChange}
-						value={this.state.newuser.gender}
-						name='gender'
-						label='gender'
-					/>
-					<Form.Input
-						onChange={this.handleInputChange}
-						value={this.state.newuser.dateOfBirth}
-						name='dateOfBirth'
-						label='DOB'
-						type='date'
-					/>
-					<button onClick={this.addPatient}>add</button>
-				</Form>
+										/> */}
+										</div>
+									);
+							  })
+							: null}
+					</div>
+				</Switch>
 			</div>
 		);
 	}
@@ -160,11 +211,20 @@ const mapStateToProps = state => {
 		patientsLoaded: state.patientsLoaded,
 		addingPatient: state.addingPatient,
 		addingPatientFinished: state.addingPatientFinished,
-		needsRefresh: state.needsRefresh
+		needsRefresh: state.needsRefresh,
+		vaccines: state.vaccines
 	};
 };
 
 export default connect(
 	mapStateToProps,
-	{ addPatient, loadPatients, removePatient, refreshPatients }
+	{
+		addPatient,
+		loadPatients,
+		removePatient,
+		refreshPatients,
+		getVaccs,
+		getDocs,
+		addVaccs
+	}
 )(cardview);

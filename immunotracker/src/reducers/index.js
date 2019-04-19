@@ -16,7 +16,10 @@ import {
 	REMOVE_PATIENT_SUCCESS,
 	REMOVE_PATIENT_FAILURE,
 	REMOVE_PATIENT_REFRESH,
-	REMOVE_PATIENT_REFRESH_FINISHED
+	REMOVE_PATIENT_REFRESH_FINISHED,
+	GET_VACCINES_START,
+	GET_VACCINES_SUCCESS,
+	GET_VACCINES_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -46,7 +49,11 @@ const initialState = {
 	patientsLoaded: false,
 	addingPatient: false,
 	addingPatientFinished: true,
-	needsRefresh: false
+	needsRefresh: false,
+	logFailMsg: "",
+	logSuccessMsg: "",
+	wasLoginGood: "",
+	vaccines: ""
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -61,7 +68,15 @@ export const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoggedIn: true,
-				isLoggedOut: false
+				isLoggedOut: false,
+				logSuccessMsg: action.payload.message,
+				wasLoginGood: true
+			};
+		case LOG_IN_FAILURE:
+			return {
+				...state,
+				logFailMsg: action.payload,
+				wasLoginGood: false
 			};
 		case REGISTER_POST_START:
 			return {
@@ -141,6 +156,14 @@ export const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				needsRefresh: false
+			};
+		}
+		case GET_VACCINES_START: {
+		}
+		case GET_VACCINES_SUCCESS: {
+			return {
+				...state,
+				vaccines: action.payload
 			};
 		}
 		default:
